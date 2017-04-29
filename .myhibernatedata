@@ -1,0 +1,16 @@
+#MyEclipse Hibernate Properties
+#Mon Apr 14 17:47:36 CST 2017
+genVersionTag=false
+genAnnotations=false
+configFile=/MicroDoctorServer/WebRoot/WEB-INF/applicationContext.xml
+reStrategyClass=
+sessionFactoryId=sessionFactory
+profile=
+detectM2M=false
+genBasicCompId=false
+keyGenerator=
+createConfigFile=true
+basePersistenceClass=
+detectO2O=false
+useJavaTypes=true
+reSettingsFile=
