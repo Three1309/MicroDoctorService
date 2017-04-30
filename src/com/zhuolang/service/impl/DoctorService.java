@@ -140,12 +140,11 @@ public class DoctorService implements IDoctorService{
         String hql = "delete Doctor where doctorId=?";
         List<Object> object = new ArrayList<Object>();
         object.add(doctorId);
-//        if (dao.executeHql(hql, object) > 0) {
-        dao.executeHql(hql, object);
+        if (dao.executeHql(hql, object) > 0) {
             return true;
-//        } else {
-//            return false;
-//        }
+        } else {
+            return false;
+        }
 
     }
 
