@@ -141,6 +141,7 @@ public class DoctorService implements IDoctorService{
         List<Object> object = new ArrayList<Object>();
         object.add(doctorId);
 //        if (dao.executeHql(hql, object) > 0) {
+        dao.executeHql(hql, object);
             return true;
 //        } else {
 //            return false;
