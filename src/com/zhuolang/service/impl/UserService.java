@@ -183,10 +183,12 @@ public class UserService implements IUserService {
                 dto.setIntroduction(user.getIntroduction());
 
                 Doctor doctor = doctorDao.get(hql, new Object[]{user.getId()});
-                dto.setHospital(doctor.getHospital());
-                dto.setOffice(doctor.getOffice());
-                dto.setAmount(doctor.getAmount());
-                dto.setLikenum(doctor.getLikenum());
+                if (doctor != null) {
+                    dto.setHospital(doctor.getHospital());
+                    dto.setOffice(doctor.getOffice());
+                    dto.setAmount(doctor.getAmount());
+                    dto.setLikenum(doctor.getLikenum());
+                }
                 doctorDtoList.add(dto);
             }
         }
