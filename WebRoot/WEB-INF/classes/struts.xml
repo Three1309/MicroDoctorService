@@ -17,6 +17,8 @@
         <action name="find_registerdoctor" class="com.zhuolang.action.UserAction" method="findRegisterDoctor"></action>
         <action name="agree_registerdoctor" class="com.zhuolang.action.UserAction" method="agreeRegisterDoctor"></action>
         <action name="update_registerdoctor" class="com.zhuolang.action.UserAction" method="updateRegisterDoctor"></action>
+        <action name="disagree_registerdoctor" class="com.zhuolang.action.UserAction" method="disAgreeRegisterDoctor"></action>
+
     </package>
 
 </struts>    

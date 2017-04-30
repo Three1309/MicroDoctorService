@@ -353,24 +353,29 @@ public class UserAction extends ActionSupport{
         String office = request.getParameter("office");
 
         List<User> userList = userService.findByPhone(phone);
-        Doctor doctor = new Doctor();
-        doctor.setDoctorId(userList.get(0).getId());
-        doctor.setHospital(hospital);
-        doctor.setOffice(office);
-        doctor.setAmount(-1);//没有成为医师，则就诊量为-1
-        doctorService.addDoctor(doctor);
-
-        //在这里添加失败会怎么样？
         PrintWriter out = response.getWriter();
-        out.print("ask_success");
+        if (userList != null && userList.size() > 0) {
+            Doctor doctor = new Doctor();
+            doctor.setDoctorId(userList.get(0).getId());
+            doctor.setHospital(hospital);
+            doctor.setOffice(office);
+            doctor.setAmount(-1);//没有成为医师，则就诊量为-1
+            doctorService.addDoctor(doctor);
+
+            //在这里添加失败会怎么样？
+            out.print("ask_success");
+        }else {
+            out.print("ask_failure");
+        }
         out.flush();
         out.close();
+
 
         return null;
     }
 
     /**
-     * g更新注册医师信息
+     * 用户更新注册医师信息
      * @return
      * @throws IOException
      */
@@ -385,28 +390,18 @@ public class UserAction extends ActionSupport{
         String office = request.getParameter("office");
 
         List<User> userList = userService.findByPhone(phone);
-        if (userList.size() > 0 && userList != null) {
-            Doctor doctor = new Doctor();
-            doctor.setDoctorId(userList.get(0).getId());
-            doctor.setHospital(hospital);
-            doctor.setOffice(office);
-            doctor.setAmount(-1);//没有成为医师，则就诊量为-1
-            doctor.setLikenum(0);
-            doctorService.updateDoctor(doctor);
-
-            //在这里添加失败会怎么样？
-            PrintWriter out = response.getWriter();
-            out.print("ask_success");
-            out.flush();
-            out.close();
-        }else {
-            //在这里添加失败会怎么样？
-            PrintWriter out = response.getWriter();
-            out.print("ask_fal");
-            out.flush();
-            out.close();
+        PrintWriter out = response.getWriter();
+        if (userList != null && userList.size() > 0) {
+            if(doctorService.updateRegiDoctorInfo(userList.get(0).getId(),hospital,office)){
+                out.print("ask_success");
+            }else {
+                out.print("ask_failure");
+            }
+        } else {
+            out.print("ask_failure");
         }
-
+        out.flush();
+        out.close();
 
         return null;
     }
@@ -421,16 +416,20 @@ public class UserAction extends ActionSupport{
         HttpServletResponse response = ServletActionContext.getResponse();
         HttpServletRequest request = ServletActionContext.getRequest();
         response.setContentType("text/html;charset=utf-8");
-
-        List<Doctor> doctorList = doctorService.findAllnoDoctors();
-
-        JSONArray jsonArray = new JSONArray();
-        for (Doctor a : doctorList) {
-            JSONObject jsonObj = (JSONObject) JSON.toJSON(a);
-            jsonArray.add(jsonObj);
-        }
+        int type = Integer.parseInt(request.getParameter("type"));
+        //Doctor表中找到请求注册为医师的信息
+        List<DoctorDto> doctorDtoList = doctorService.findAllnoDoctors();
         PrintWriter out = response.getWriter();
-        out.print(jsonArray.toString());
+        if (doctorDtoList != null && doctorDtoList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (DoctorDto a : doctorDtoList) {
+                JSONObject jsonObj = (JSONObject) JSON.toJSON(a);
+                jsonArray.add(jsonObj);
+            }
+            out.print(jsonArray.toString());
+        }else
+            out.print(JSON.toJSON(new DoctorDto()));
+
         out.flush();
         out.close();
         return null;
@@ -447,24 +446,42 @@ public class UserAction extends ActionSupport{
         response.setContentType("text/html;charset=utf-8");
 
         // 测试插入数据
-        String doctorId = request.getParameter("doctorId");
-        if(doctorService.updateRegiDoctor(Integer.parseInt(doctorId)) && userService.updateUserType(Integer.parseInt(doctorId))){
-            //在这里添加失败会怎么样？
-            PrintWriter out = response.getWriter();
+        int doctorId = Integer.parseInt(request.getParameter("doctorId"));
+        PrintWriter out = response.getWriter();
+        if(doctorService.updateRegiDoctor(doctorId) && userService.updateUserType(doctorId)){
             out.print("agreeask_success");
-            out.flush();
-            out.close();
         }else {
-            //在这里添加失败会怎么样？
-            PrintWriter out = response.getWriter();
             out.print("agreeask_failure");
-            out.flush();
-            out.close();
         }
 
+        out.flush();
+        out.close();
         return null;
     }
 
+    /**
+     * 管理员 不通过普通用户成为医师，删除Doctor表中的申请信息
+     * @return
+     * @throws IOException
+     */
+    public String disAgreeRegisterDoctor() throws IOException{
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+
+        // 测试插入数据
+        int doctorId = Integer.parseInt(request.getParameter("doctorId"));
+        PrintWriter out = response.getWriter();
+        if(doctorService.deleteDoctorByDoctorId(doctorId)){
+            out.print("disagreeask_success");
+        }else {
+            out.print("disagreeask_failure");
+        }
+
+        out.flush();
+        out.close();
+        return null;
+    }
 
 
 

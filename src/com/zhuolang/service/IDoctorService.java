@@ -1,5 +1,6 @@
 package com.zhuolang.service;
 
+import com.zhuolang.dto.DoctorDto;
 import com.zhuolang.model.Doctor;
 
 import java.util.List;
@@ -15,15 +16,19 @@ public interface IDoctorService {
 
     public boolean updateRegiDoctor(int id);
 
+    public boolean updateRegiDoctorInfo(int id, String hospital, String office);
+
     List<Doctor> findAllDoctor();
 
-    public List<Doctor> findAllnoDoctors();
+    public List<DoctorDto> findAllnoDoctors();
 
     List<Doctor> findDoctorById(int id);
 
     List<Doctor> findDoctorByDoctorId(int doctorId);
 
     void deleteDoctor(List<Doctor> findDoctor);
+
+    public boolean deleteDoctorByDoctorId(int doctorId);
 
 
 }
