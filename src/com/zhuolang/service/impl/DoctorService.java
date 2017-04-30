@@ -100,17 +100,19 @@ public class DoctorService implements IDoctorService{
                 dto.setLikenum(doctor.getLikenum());
 
                 User user = userdao.get(hqluser, new Object[]{doctor.getDoctorId()});
+                if (user != null) {
 
-                dto.setId(user.getId());
-                dto.setName(user.getName());
-                dto.setNickname(user.getNickname());
-                dto.setPassword(user.getPassword());
-                dto.setGender(user.getGender());
-                dto.setAge(user.getAge());
-                dto.setPhone(user.getPhone());
-                dto.setAddress(user.getAddress());
-                dto.setSignature(user.getSignature());
-                dto.setIntroduction(user.getIntroduction());
+                    dto.setId(user.getId());
+                    dto.setName(user.getName());
+                    dto.setNickname(user.getNickname());
+                    dto.setPassword(user.getPassword());
+                    dto.setGender(user.getGender());
+                    dto.setAge(user.getAge());
+                    dto.setPhone(user.getPhone());
+                    dto.setAddress(user.getAddress());
+                    dto.setSignature(user.getSignature());
+                    dto.setIntroduction(user.getIntroduction());
+                }
                 doctorDtoList.add(dto);
             }
         }
@@ -138,11 +140,11 @@ public class DoctorService implements IDoctorService{
         String hql = "delete Doctor where doctorId=?";
         List<Object> object = new ArrayList<Object>();
         object.add(doctorId);
-        if (dao.executeHql(hql, object) > 0) {
+//        if (dao.executeHql(hql, object) > 0) {
             return true;
-        } else {
-            return false;
-        }
+//        } else {
+//            return false;
+//        }
 
     }
 
