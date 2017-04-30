@@ -306,7 +306,7 @@ public class UserAction extends ActionSupport{
                 out.close();
             }else {
                 PrintWriter out = response.getWriter();
-                out.print(JSON.toJSON(new DoctorDto()).toString());
+                out.print("nodata");
                 out.flush();
                 out.close();
             }
@@ -328,7 +328,7 @@ public class UserAction extends ActionSupport{
                 out.close();
             }else {
                 PrintWriter out = response.getWriter();
-                out.print(JSON.toJSON(new User()).toString());
+                out.print("nodata");
                 out.flush();
                 out.close();
             }
@@ -428,7 +428,7 @@ public class UserAction extends ActionSupport{
             }
             out.print(jsonArray.toString());
         }else
-            out.print(JSON.toJSON(new DoctorDto()));
+            out.print("nodata");
 
         out.flush();
         out.close();
