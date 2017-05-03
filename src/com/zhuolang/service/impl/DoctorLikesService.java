@@ -27,12 +27,16 @@ public class DoctorLikesService implements IDoctorLikesService {
      */
     @Override
     public boolean findisOrnotLike(int doctorId,int appointmentId) {
-        String hql="from DoctorLikes where doctorId=? and apotmid=?";
-        DoctorLikes doctorLikes = doctorLikesDao.get(hql, new Object[]{doctorId,appointmentId});
-        if (doctorLikes == null) {//为空就是没有，找不到，返回false
-            return false;
-        } else {
+        String hql="from DoctorLikes where doctorId=? and apotmId=?";
+//        DoctorLikes doctorLikes = doctorLikesDao.find(hql, new Object[]{doctorId,appointmentId});
+        List<Object> object = new ArrayList<Object>();
+        object.add(doctorId);
+        object.add(appointmentId);
+        List<DoctorLikes> doctorLikes = doctorLikesDao.find(hql, object);
+        if (doctorLikes != null && doctorLikes.size() > 0) {
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -43,15 +47,18 @@ public class DoctorLikesService implements IDoctorLikesService {
      */
     @Override
     public boolean deleteDoctorLikes(int doctorId,int appointmentId) {
-        String hql = "delete Doctor where doctorId=? and apotmid=?";
+        String hql="from DoctorLikes where doctorId=? and apotmId=?";
+//        DoctorLikes doctorLikes = doctorLikesDao.find(hql, new Object[]{doctorId,appointmentId});
         List<Object> object = new ArrayList<Object>();
         object.add(doctorId);
-        if (doctorLikesDao.executeHql(hql, object) > 0) {
+        object.add(appointmentId);
+        List<DoctorLikes> doctorLikes = doctorLikesDao.find(hql, object);
+        if (doctorLikes != null && doctorLikes.size() > 0) {
+            doctorLikesDao.delete(doctorLikes.get(0));
             return true;
         } else {
             return false;
         }
-
     }
 
 }

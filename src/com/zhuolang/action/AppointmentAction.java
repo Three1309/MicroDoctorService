@@ -294,10 +294,10 @@ public class AppointmentAction {
                 doctorLikesService.deleteDoctorLikes(doctorId, appointmentId);
             }else {
                 DoctorLikes doctorLikes = new DoctorLikes();
-                Date likeTime = TimeUtil.strToDate(request.getParameter("seeTime"));
+//                Date likeTime = TimeUtil.strToDate(request.getParameter("seeTime"));
                 doctorLikes.setDoctorId(doctorId);
                 doctorLikes.setAppointmentId(appointmentId);
-                doctorLikes.setLikesTime(likeTime);
+                doctorLikes.setLikesTime(new Date());
                 doctorLikesService.addDoctorLikes(doctorLikes);
                 doctorList.get(0).setLikenum( (doctorList.get(0).getLikenum()+1) );
             }

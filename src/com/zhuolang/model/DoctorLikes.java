@@ -14,13 +14,13 @@ public class DoctorLikes {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    @Column(name = "patientId", length = 11)
+    @Column(name = "apotmId", length = 11)
     private int appointmentId;
 
-    @Column(name = "patientId", length = 11)
+    @Column(name = "doctorId", length = 11)
     private int doctorId;
 
-    @Column(name = "seeTime")
+    @Column(name = "likesTime")
     private Date likesTime;
 
     public int getId() {
