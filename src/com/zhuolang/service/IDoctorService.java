@@ -14,6 +14,8 @@ public interface IDoctorService {
 
     void updateDoctor(Doctor doctor);
 
+    public boolean updateAmount(int doctorId, int amount);
+
     public boolean updateRegiDoctor(int id);
 
     public boolean updateRegiDoctorInfo(int id, String hospital, String office);
@@ -23,6 +25,8 @@ public interface IDoctorService {
     public List<DoctorDto> findAllnoDoctors();
 
     List<Doctor> findDoctorById(int id);
+
+    public boolean updateDLikesNum(int doctorId, int likenum);
 
     List<Doctor> findDoctorByDoctorId(int doctorId);
 

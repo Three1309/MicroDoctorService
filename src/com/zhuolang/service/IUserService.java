@@ -26,6 +26,8 @@ public interface IUserService {
 
     List<DoctorDto> findDoctorDto();
 
+    public String findById(int id);
+
     boolean updatePhone(int id, String phone);
 
     public boolean updateUserType(int id);

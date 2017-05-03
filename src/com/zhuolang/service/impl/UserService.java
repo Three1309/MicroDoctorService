@@ -72,6 +72,21 @@ public class UserService implements IUserService {
         return userList;
     }
 
+    /**
+     * 通过id找用户，找到返回用户数据
+     */
+    @Override
+    public String findById(int id) {
+        String hql="from User where id=?";
+        List<Object> idObject = new ArrayList<Object>();
+        idObject.add(id);
+        List<User> userList = userDao.find(hql, idObject);
+        if (userList != null && userList.size() > 0) {
+            return userList.get(0).getName();
+        }else
+            return "";
+    }
+
 
     /**
      * 修改密码

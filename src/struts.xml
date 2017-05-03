@@ -19,6 +19,15 @@
         <action name="disagree_registerdoctor" class="com.zhuolang.action.UserAction" method="disAgreeRegisterDoctor"></action>
         <action name="find_alldoctor" class="com.zhuolang.action.UserAction" method="findByType"></action>
 
+        <action name="add_appointment" class="com.zhuolang.action.AppointmentAction" method="addAppointment"></action>
+        <action name="find_apptmbydocId" class="com.zhuolang.action.AppointmentAction" method="findByDocId"></action>
+        <action name="find_doctseehistory" class="com.zhuolang.action.AppointmentAction" method="findDoctSeeHistory"></action>
+        <action name="update_apptmdiagnose" class="com.zhuolang.action.AppointmentAction" method="updateDiagnose"></action>
+        <action name="update_apptmdoctorsay" class="com.zhuolang.action.AppointmentAction" method="updateSaying"></action>
+        <action name="find_myappointment" class="com.zhuolang.action.AppointmentAction" method="findByPatId"></action>
+        <action name="find_myappointment_history" class="com.zhuolang.action.AppointmentAction" method="findHistoryAptmByPatId"></action>
+        <action name="update_doctorlikes" class="com.zhuolang.action.AppointmentAction" method="updateDoctorLikes"></action>
+
     </package>
 
 </struts>    

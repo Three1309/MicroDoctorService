@@ -33,7 +33,18 @@ public class DoctorService implements IDoctorService{
     public void updateDoctor(Doctor doctor) {
         dao.update(doctor);
     }
-
+    @Override
+    public boolean updateAmount(int doctorId,int amount) {
+        String hql = "update Doctor set amount = ? where doctorId=?";
+        List<Object> object = new ArrayList<Object>();
+        object.add(amount);
+        object.add(doctorId);
+        if (dao.executeHql(hql, object) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     @Override
     public boolean updateRegiDoctorInfo(int id,String hospital,String office) {
         String hql = "update Doctor set hospital = ?,office = ? where doctorId=?";
@@ -60,6 +71,26 @@ public class DoctorService implements IDoctorService{
         }
     }
 
+
+    /**
+     * 更新好评数
+     * @param doctorId
+     * @param likenum
+     * @return
+     */
+    @Override
+    public boolean updateDLikesNum(int doctorId,int likenum) {
+        String hql = "update Doctor set likenum=? where doctorId=?";
+        List<Object> object = new ArrayList<Object>();
+        object.add(likenum);
+        object.add(doctorId);
+        if (dao.executeHql(hql, object) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public List<Doctor> findAllDoctor() {
         String hql = "from Doctor";
@@ -74,6 +105,7 @@ public class DoctorService implements IDoctorService{
         List<Doctor> doctorList = dao.find(hql,idObject);
         return doctorList;
     }
+
 
     @Override
     public List<Doctor> findDoctorByDoctorId(int doctorId) {

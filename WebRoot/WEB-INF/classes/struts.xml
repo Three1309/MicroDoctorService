@@ -6,19 +6,26 @@
     <package name="com.zhuolang.action" extends="struts-default,json-default">
         <!-- 		 拦截add_user的URL，交由UserAction类中的add方法处理  -->
         <!--如果action方法里没有返回值的话，映射不了，为什么？???所以改成了返回空-->
-        <action name="add_user" class="com.zhuolang.action.UserAction" method="addUser"></action>
         <action name="login_user" class="com.zhuolang.action.UserAction" method="login"></action>
-        <action name="update_password" class="com.zhuolang.action.UserAction" method="updatePassword"></action>
+        <action name="add_user" class="com.zhuolang.action.UserAction" method="addUser"></action>
         <action name="finduser_byphone" class="com.zhuolang.action.UserAction" method="findByPhone"></action>
-        <action name="update_user" class="com.zhuolang.action.UserAction" method="updateUser"></action>
-        <action name="find_alldoctor" class="com.zhuolang.action.UserAction" method="findByType"></action>
+        <action name="update_password" class="com.zhuolang.action.UserAction" method="updatePassword"></action>
         <action name="update_phone" class="com.zhuolang.action.UserAction" method="updatePhone"></action>
+        <action name="update_user" class="com.zhuolang.action.UserAction" method="updateUser"></action>
         <action name="register_doctor" class="com.zhuolang.action.UserAction" method="registerDoctor"></action>
+        <action name="update_registerdoctor" class="com.zhuolang.action.UserAction" method="updateRegisterDoctor"></action>
         <action name="find_registerdoctor" class="com.zhuolang.action.UserAction" method="findRegisterDoctor"></action>
         <action name="agree_registerdoctor" class="com.zhuolang.action.UserAction" method="agreeRegisterDoctor"></action>
-        <action name="update_registerdoctor" class="com.zhuolang.action.UserAction" method="updateRegisterDoctor"></action>
         <action name="disagree_registerdoctor" class="com.zhuolang.action.UserAction" method="disAgreeRegisterDoctor"></action>
+        <action name="find_alldoctor" class="com.zhuolang.action.UserAction" method="findByType"></action>
 
+        <action name="add_appointment" class="com.zhuolang.action.AppointmentAction" method="addAppointment"></action>
+        <action name="find_apptmbydocId" class="com.zhuolang.action.AppointmentAction" method="findByDocId"></action>
+        <action name="find_doctseehistory" class="com.zhuolang.action.AppointmentAction" method="findDoctSeeHistory"></action>
+        <action name="update_apptmdiagnose" class="com.zhuolang.action.AppointmentAction" method="updateDiagnose"></action>
+        <action name="update_apptmdoctorsay" class="com.zhuolang.action.AppointmentAction" method="updateSaying"></action>
+        <action name="find_myappointment" class="com.zhuolang.action.AppointmentAction" method="findByPatId"></action>
+        <action name="find_myappointment_history" class="com.zhuolang.action.AppointmentAction" method="findHistoryAptmByPatId"></action>
     </package>
 
 </struts>    
