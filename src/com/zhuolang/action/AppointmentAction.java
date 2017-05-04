@@ -319,7 +319,7 @@ public class AppointmentAction {
         HttpServletResponse response = ServletActionContext.getResponse();
         HttpServletRequest request = ServletActionContext.getRequest();
         response.setContentType("text/html;charset=utf-8");
-
+        int doctorId = Integer.parseInt(request.getParameter("doctorId"));
         List<Doctor> doctorList = doctorService.findAllDoctor();
         List<String> officeList = new ArrayList<String>();
 
@@ -356,7 +356,7 @@ public class AppointmentAction {
         HttpServletResponse response = ServletActionContext.getResponse();
         HttpServletRequest request = ServletActionContext.getRequest();
         response.setContentType("text/html;charset=utf-8");
-
+        int doctorId = Integer.parseInt(request.getParameter("doctorId"));
         List<Doctor> doctorList = doctorService.findAllDoctor();
         List<String> hospitalList = new ArrayList<String>();
 
