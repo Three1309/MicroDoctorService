@@ -310,5 +310,79 @@ public class AppointmentAction {
         return null;
     }
 
+    /**
+     * 查找所有的科室
+     * @return
+     * @throws IOException
+     */
+    public String findAllOffice() throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+
+        List<Doctor> doctorList = doctorService.findAllDoctor();
+        List<String> officeList = new ArrayList<String>();
+
+        PrintWriter out = response.getWriter();
+
+        if (doctorList != null && doctorList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (Doctor d : doctorList) {
+                officeList.add(d.getOffice());
+            }
+            for (int i = 0; i < officeList.size(); i++) {
+                for (int j=i+1;j<officeList.size();) {
+                    System.out.println(officeList);
+                    if ( officeList.get(i).equals( officeList.get(j) ) ) {
+                        officeList.remove(j);
+                    }else {
+                        j++;
+                    }
+                }
+            }
+        }
+        out.print(officeList);
+        out.flush();
+        out.close();
+        return null;
+    }
+
+    /**
+     * 查找所有的医院
+     * @return
+     * @throws IOException
+     */
+    public String findAllHospital() throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+
+        List<Doctor> doctorList = doctorService.findAllDoctor();
+        List<String> hospitalList = new ArrayList<String>();
+
+        PrintWriter out = response.getWriter();
+
+        if (doctorList != null && doctorList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (Doctor d : doctorList) {
+                hospitalList.add(d.getOffice());
+            }
+            for (int i = 0; i < hospitalList.size(); i++) {
+                for (int j=i+1;j<hospitalList.size();) {
+                    System.out.println(hospitalList);
+                    if ( hospitalList.get(i).equals( hospitalList.get(j) ) ) {
+                        hospitalList.remove(j);
+                    }else {
+                        j++;
+                    }
+                }
+            }
+        }
+        out.print(hospitalList);
+        out.flush();
+        out.close();
+        return null;
+    }
+
 
 }
