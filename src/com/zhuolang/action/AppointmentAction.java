@@ -341,7 +341,7 @@ public class AppointmentAction {
                 }
             }
         }
-        out.print(officeList);
+        out.print(officeList.toString());
         out.flush();
         out.close();
         return null;
@@ -378,7 +378,7 @@ public class AppointmentAction {
                 }
             }
         }
-        out.print(hospitalList);
+        out.print(hospitalList.toString());
         out.flush();
         out.close();
         return null;
