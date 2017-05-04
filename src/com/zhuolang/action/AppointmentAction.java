@@ -321,27 +321,31 @@ public class AppointmentAction {
         response.setContentType("text/html;charset=utf-8");
         int doctorId = Integer.parseInt(request.getParameter("doctorId"));
         List<Doctor> doctorList = doctorService.findAllDoctor();
-        List<String> officeList = new ArrayList<String>();
 
         PrintWriter out = response.getWriter();
 
         if (doctorList != null && doctorList.size() > 0) {
-            JSONArray jsonArray = new JSONArray();
-            for (Doctor d : doctorList) {
-                officeList.add(d.getOffice());
-            }
-            for (int i = 0; i < officeList.size(); i++) {
-                for (int j=i+1;j<officeList.size();) {
-                    System.out.println(officeList);
-                    if ( officeList.get(i).equals( officeList.get(j) ) ) {
-                        officeList.remove(j);
+            for (int i = 0; i < doctorList.size(); i++) {
+                for (int j=i+1;j<doctorList.size();) {
+                    if ( doctorList.get(i).getOffice().equals( doctorList.get(j).getOffice() ) ) {
+                        doctorList.remove(j);
                     }else {
                         j++;
                     }
                 }
             }
         }
-        out.print(officeList.toString());
+        if (doctorList != null && doctorList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (Doctor a : doctorList) {
+                JSONObject jsonObj = (JSONObject) JSON.toJSON(a);
+                jsonArray.add(jsonObj);
+
+            }
+            out.print(jsonArray.toString());
+        }else {
+            out.print("nodata");
+        }
         out.flush();
         out.close();
         return null;
@@ -358,27 +362,31 @@ public class AppointmentAction {
         response.setContentType("text/html;charset=utf-8");
         int doctorId = Integer.parseInt(request.getParameter("doctorId"));
         List<Doctor> doctorList = doctorService.findAllDoctor();
-        List<String> hospitalList = new ArrayList<String>();
 
         PrintWriter out = response.getWriter();
 
         if (doctorList != null && doctorList.size() > 0) {
-            JSONArray jsonArray = new JSONArray();
-            for (Doctor d : doctorList) {
-                hospitalList.add(d.getOffice());
-            }
-            for (int i = 0; i < hospitalList.size(); i++) {
-                for (int j=i+1;j<hospitalList.size();) {
-                    System.out.println(hospitalList);
-                    if ( hospitalList.get(i).equals( hospitalList.get(j) ) ) {
-                        hospitalList.remove(j);
+            for (int i = 0; i < doctorList.size(); i++) {
+                for (int j=i+1;j<doctorList.size();) {
+                    if ( doctorList.get(i).getHospital().equals( doctorList.get(j).getHospital() ) ) {
+                        doctorList.remove(j);
                     }else {
                         j++;
                     }
                 }
             }
         }
-        out.print(hospitalList.toString());
+        if (doctorList != null && doctorList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (Doctor a : doctorList) {
+                JSONObject jsonObj = (JSONObject) JSON.toJSON(a);
+                jsonArray.add(jsonObj);
+
+            }
+            out.print(jsonArray.toString());
+        }else {
+            out.print("nodata");
+        }
         out.flush();
         out.close();
         return null;

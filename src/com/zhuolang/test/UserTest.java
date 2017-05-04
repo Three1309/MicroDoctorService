@@ -1,6 +1,8 @@
 package com.zhuolang.test;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.zhuolang.model.Doctor;
 import com.zhuolang.model.User;
 import com.zhuolang.service.IDoctorService;
@@ -53,27 +55,31 @@ public class UserTest {
 
     @Test
     public void findAllOfficeTest() throws IOException {
+        List<Doctor> doctorList = doctorService.findAllDoctor();
+        List<String> officeList = new ArrayList<String>();
 
-//        List<Doctor> doctorList = doctorService.findAllDoctor();
-//        List<String> officeList = new ArrayList<String>();
-//        if (doctorList != null && doctorList.size() > 0) {
-//            JSONArray jsonArray = new JSONArray();
-//            for (Doctor d : doctorList) {
-//                officeList.add(d.getOffice());
-//            }
-//            for (int i = 0; i < officeList.size(); i++) {
-//                for (int j=i+1;j<officeList.size();) {
-//                    System.out.println(officeList);
-//                    if ( officeList.get(i).equals( officeList.get(j) ) ) {
-//                        officeList.remove(j);
-//                    }else {
-//                        j++;
-//                    }
-//                }
-//            }
-//        }
-//        System.out.println(officeList.get(0));
-//        System.out.println(officeList.get(1));
+        if (doctorList != null && doctorList.size() > 0) {
+            for (int i = 0; i < doctorList.size(); i++) {
+                for (int j=i+1;j<doctorList.size();) {
+                    if ( doctorList.get(i).getOffice().equals( doctorList.get(j).getOffice() ) ) {
+                        doctorList.remove(j);
+                    }else {
+                        j++;
+                    }
+                }
+            }
+        }
+        if (doctorList != null && doctorList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (Doctor a : doctorList) {
+                JSONObject jsonObj = (JSONObject) JSON.toJSON(a);
+                jsonArray.add(jsonObj);
+
+            }
+            System.out.println(jsonArray.toString());
+        }else {
+            System.out.println();
+        }
     }
 
 }
