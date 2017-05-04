@@ -352,7 +352,7 @@ public class AppointmentAction {
     }
 
     /**
-     * 查找所有的医院
+     * 查找有某科室的所有的医院
      * @return
      * @throws IOException
      */
@@ -360,8 +360,8 @@ public class AppointmentAction {
         HttpServletResponse response = ServletActionContext.getResponse();
         HttpServletRequest request = ServletActionContext.getRequest();
         response.setContentType("text/html;charset=utf-8");
-        int doctorId = Integer.parseInt(request.getParameter("doctorId"));
-        List<Doctor> doctorList = doctorService.findAllDoctor();
+        String office = request.getParameter("office");
+        List<Doctor> doctorList = doctorService.findDoctorByOffice(office);
 
         PrintWriter out = response.getWriter();
 

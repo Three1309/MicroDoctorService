@@ -22,6 +22,8 @@ public interface IDoctorService {
 
     List<Doctor> findAllDoctor();
 
+    public List<Doctor> findDoctorByOffice(String office);
+
     public List<DoctorDto> findAllnoDoctors();
 
     List<Doctor> findDoctorById(int id);
