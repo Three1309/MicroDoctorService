@@ -55,13 +55,14 @@ public class UserTest {
 
     @Test
     public void findAllOfficeTest() throws IOException {
-        List<Doctor> doctorList = doctorService.findAllDoctor();
-        List<String> officeList = new ArrayList<String>();
+        String office = "骨科";
+        List<Doctor> doctorList = doctorService.findDoctorByOffice(office);
+
 
         if (doctorList != null && doctorList.size() > 0) {
             for (int i = 0; i < doctorList.size(); i++) {
                 for (int j=i+1;j<doctorList.size();) {
-                    if ( doctorList.get(i).getOffice().equals( doctorList.get(j).getOffice() ) ) {
+                    if ( doctorList.get(i).getHospital().equals( doctorList.get(j).getHospital() ) ) {
                         doctorList.remove(j);
                     }else {
                         j++;
@@ -78,7 +79,6 @@ public class UserTest {
             }
             System.out.println(jsonArray.toString());
         }else {
-            System.out.println();
         }
     }
 

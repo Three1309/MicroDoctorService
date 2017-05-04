@@ -26,6 +26,10 @@ public interface IUserService {
 
     List<DoctorDto> findDoctorDto();
 
+    public List<User> findUserDataById(int id);
+
+    public List<DoctorDto> findDoctorDtoByOffandHosp(String office, String hospital);
+
     public String findById(int id);
 
     boolean updatePhone(int id, String phone);

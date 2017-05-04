@@ -18,6 +18,8 @@
         <action name="agree_registerdoctor" class="com.zhuolang.action.UserAction" method="agreeRegisterDoctor"></action>
         <action name="disagree_registerdoctor" class="com.zhuolang.action.UserAction" method="disAgreeRegisterDoctor"></action>
         <action name="find_alldoctor" class="com.zhuolang.action.UserAction" method="findByType"></action>
+        <action name="finddoctor_byOfficeAndHospital" class="com.zhuolang.action.UserAction" method="findByOfficeAndHospital"></action>
+
 
         <action name="add_appointment" class="com.zhuolang.action.AppointmentAction" method="addAppointment"></action>
         <action name="find_apptmbydocId" class="com.zhuolang.action.AppointmentAction" method="findByDocId"></action>

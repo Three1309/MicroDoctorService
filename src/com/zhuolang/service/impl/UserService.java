@@ -87,6 +87,21 @@ public class UserService implements IUserService {
             return "";
     }
 
+    /**
+     * 通过id找用户，找到返回用户所有数据
+     */
+    @Override
+    public List<User> findUserDataById(int id) {
+        String hql="from User where id=?";
+        List<Object> idObject = new ArrayList<Object>();
+        idObject.add(id);
+        List<User> userList = userDao.find(hql, idObject);
+        if (userList != null && userList.size() > 0) {
+            return userList;
+        }else
+            return null;
+    }
+
 
     /**
      * 修改密码
@@ -203,6 +218,46 @@ public class UserService implements IUserService {
                     dto.setOffice(doctor.getOffice());
                     dto.setAmount(doctor.getAmount());
                     dto.setLikenum(doctor.getLikenum());
+                }
+                doctorDtoList.add(dto);
+            }
+        }
+
+        return doctorDtoList;
+    }
+
+
+    @Override
+    public List<DoctorDto> findDoctorDtoByOffandHosp(String office,String hospital) {
+        String hql = "from Doctor where office=? and hospital=?";
+        List<Object> idObject = new ArrayList<Object>();
+        idObject.add(office);
+        idObject.add(hospital);
+        List<Doctor> doctorList = doctorDao.find(hql, idObject);
+
+        List<DoctorDto> doctorDtoList = new ArrayList<DoctorDto>();
+
+        if (doctorList != null && doctorList.size() > 0) {
+            for (Doctor doctor : doctorList) {
+                DoctorDto dto=new DoctorDto();
+
+                dto.setId(doctor.getDoctorId());
+                dto.setHospital(doctor.getHospital());
+                dto.setOffice(doctor.getOffice());
+                dto.setAmount(doctor.getAmount());
+                dto.setLikenum(doctor.getLikenum());
+
+                List<User> userList = findUserDataById(doctor.getDoctorId());
+                if (userList.size() > 0) {
+                    dto.setName(userList.get(0).getName());
+                    dto.setNickname(userList.get(0).getNickname());
+                    dto.setPassword(userList.get(0).getPassword());
+                    dto.setGender(userList.get(0).getGender());
+                    dto.setAge(userList.get(0).getAge());
+                    dto.setPhone(userList.get(0).getPhone());
+                    dto.setAddress(userList.get(0).getAddress());
+                    dto.setSignature(userList.get(0).getSignature());
+                    dto.setIntroduction(userList.get(0).getIntroduction());
                 }
                 doctorDtoList.add(dto);
             }

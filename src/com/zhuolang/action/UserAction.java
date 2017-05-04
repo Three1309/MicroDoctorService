@@ -338,6 +338,39 @@ public class UserAction extends ActionSupport{
     }
 
     /**
+     * 查看医师列表（用户类型为1）
+     * @return
+     * @throws IOException
+     */
+    public String findByOfficeAndHospital() throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+        String office = request.getParameter("office");
+        String hospital = request.getParameter("hospital");
+
+
+        List<DoctorDto> doctorDtos = userService.findDoctorDtoByOffandHosp(office,hospital);
+        if (doctorDtos != null && doctorDtos.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (DoctorDto a : doctorDtos) {
+                JSONObject jsonObj = (JSONObject) JSON.toJSON(a);
+                jsonArray.add(jsonObj);
+            }
+            PrintWriter out = response.getWriter();
+            out.print(jsonArray.toString());
+            out.flush();
+            out.close();
+        }else {
+            PrintWriter out = response.getWriter();
+            out.print("nodata");
+            out.flush();
+            out.close();
+        }
+        return null;
+    }
+
+    /**
      * 普通用户申请成为医师
      * @return
      * @throws IOException
