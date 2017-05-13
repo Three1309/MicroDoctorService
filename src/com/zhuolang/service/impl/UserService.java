@@ -229,7 +229,7 @@ public class UserService implements IUserService {
 
     @Override
     public List<DoctorDto> findDoctorDtoByOffandHosp(String office,String hospital) {
-        String hql = "from Doctor where office=? and hospital=?";
+        String hql = "from Doctor where office=? and hospital=? and amount!=-1";
         List<Object> idObject = new ArrayList<Object>();
         idObject.add(office);
         idObject.add(hospital);

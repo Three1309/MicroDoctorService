@@ -273,6 +273,33 @@ public class AppointmentAction {
     }
 
     /**
+     * 是否已点赞
+     * @return
+     * @throws IOException
+     */
+    public String likesOrNot() throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+        // 根据主键id来更新信息，将整个appointment传到数据库，通过id找到要更新的appointment
+        int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
+        int doctorId = Integer.parseInt(request.getParameter("doctorId"));
+        List<Doctor> doctorList = doctorService.findDoctorByDoctorId(doctorId);
+        PrintWriter out = response.getWriter();
+        if (doctorList != null && doctorList.size() > 0) {
+            //是否已点赞，如果没点则添加，点了则删除
+            if(doctorLikesService.findisOrnotLike(doctorId, appointmentId)){
+                out.print("likes");
+            }else {
+                out.print("dislikes");
+            }
+        }
+        out.flush();
+        out.close();
+        return null;
+    }
+
+    /**
      * 就诊成功后给医生点赞，医生表中的好评数加一
      * @return
      * @throws IOException
@@ -285,6 +312,7 @@ public class AppointmentAction {
         int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
         int doctorId = Integer.parseInt(request.getParameter("doctorId"));
         List<Doctor> doctorList = doctorService.findDoctorByDoctorId(doctorId);
+        PrintWriter out = response.getWriter();
         if (doctorList != null && doctorList.size() > 0) {
             //是否已点赞，如果没点则添加，点了则删除
             if(doctorLikesService.findisOrnotLike(doctorId, appointmentId)){
@@ -292,6 +320,7 @@ public class AppointmentAction {
                     doctorList.get(0).setLikenum( (doctorList.get(0).getLikenum()-1) );
                 }
                 doctorLikesService.deleteDoctorLikes(doctorId, appointmentId);
+                out.print("dislikes_success");
             }else {
                 DoctorLikes doctorLikes = new DoctorLikes();
 //                Date likeTime = TimeUtil.strToDate(request.getParameter("seeTime"));
@@ -300,11 +329,10 @@ public class AppointmentAction {
                 doctorLikes.setLikesTime(new Date());
                 doctorLikesService.addDoctorLikes(doctorLikes);
                 doctorList.get(0).setLikenum( (doctorList.get(0).getLikenum()+1) );
+                out.print("likes_success");
             }
             doctorService.updateDLikesNum(doctorId, doctorList.get(0).getLikenum());
         }
-        PrintWriter out = response.getWriter();
-        out.print("likes_success");
         out.flush();
         out.close();
         return null;

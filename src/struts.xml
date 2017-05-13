@@ -29,6 +29,7 @@
         <action name="find_myappointment" class="com.zhuolang.action.AppointmentAction" method="findByPatId"></action>
         <action name="find_myappointment_history" class="com.zhuolang.action.AppointmentAction" method="findHistoryAptmByPatId"></action>
         <action name="update_doctorlikes" class="com.zhuolang.action.AppointmentAction" method="updateDoctorLikes"></action>
+        <action name="likes_ornot" class="com.zhuolang.action.AppointmentAction" method="likesOrNot"></action>
         <action name="find_allhospital" class="com.zhuolang.action.AppointmentAction" method="findAllHospital"></action>
         <action name="find_alloffice" class="com.zhuolang.action.AppointmentAction" method="findAllOffice"></action>
 

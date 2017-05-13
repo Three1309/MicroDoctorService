@@ -338,7 +338,7 @@ public class UserAction extends ActionSupport{
     }
 
     /**
-     * 查看医师列表（用户类型为1）
+     * 通过Office、Hospital查看医师列表
      * @return
      * @throws IOException
      */
