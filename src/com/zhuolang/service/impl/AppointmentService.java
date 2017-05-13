@@ -1,9 +1,11 @@
 package com.zhuolang.service.impl;
 
 import com.zhuolang.dao.IAppointmentDao;
+import com.zhuolang.dao.impl.DoctorDao;
 import com.zhuolang.dao.impl.UserDao;
 import com.zhuolang.dto.AppointmentDto;
 import com.zhuolang.model.Appointment;
+import com.zhuolang.model.Doctor;
 import com.zhuolang.model.User;
 import com.zhuolang.service.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class AppointmentService implements IAppointmentService {
     IAppointmentDao dao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    DoctorDao doctorDao;
 
     /**
      *添加预约
@@ -163,6 +167,14 @@ public class AppointmentService implements IAppointmentService {
             dto.setDisease(appointments.get(i).getDisease());
             dto.setdNumber(appointments.get(i).getdNumber());
             dto.setDoctorSay(appointments.get(0).getDoctorSay());
+
+            List<Object> idObjectd = new ArrayList<Object>();
+            idObjectd.add(appointments.get(i).getDoctorId());
+            List<Doctor> doctorList = new ArrayList<Doctor>();
+            doctorList = doctorDao.find("from Doctor where doctorId=?", idObjectd);
+            if (doctorList != null && doctorList.size() > 0) {
+                dto.setdLikenum(doctorList.get(0).getLikenum());
+            }
             appointmentDtos.add(dto);
         }
         return appointmentDtos;
