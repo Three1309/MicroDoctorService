@@ -32,7 +32,6 @@
         <action name="likes_ornot" class="com.zhuolang.action.AppointmentAction" method="likesOrNot"></action>
         <action name="find_allhospital" class="com.zhuolang.action.AppointmentAction" method="findAllHospital"></action>
         <action name="find_alloffice" class="com.zhuolang.action.AppointmentAction" method="findAllOffice"></action>
-		<action name="find_doctseehistory" class="com.zhuolang.action.AppointmentAction" method="findDoctSeeHistory"></action>
 
     </package>
 
