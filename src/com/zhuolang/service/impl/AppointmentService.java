@@ -166,7 +166,7 @@ public class AppointmentService implements IAppointmentService {
             dto.setDiagnose(appointments.get(i).getDiagnose());
             dto.setDisease(appointments.get(i).getDisease());
             dto.setdNumber(appointments.get(i).getdNumber());
-            dto.setDoctorSay(appointments.get(0).getDoctorSay());
+            dto.setDoctorSay(appointments.get(i).getDoctorSay());
 
             List<Object> idObjectd = new ArrayList<Object>();
             idObjectd.add(appointments.get(i).getDoctorId());
