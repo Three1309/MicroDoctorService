@@ -20,7 +20,7 @@ public interface IAppointmentService {
 
     void updateAppointment(Appointment appointment);
 
-    public void updateDoctorSay(int id, String doctorSay);
+    void updateDoctorSay(int id, String doctorSay);
 
     List<Appointment> findAllAppointment();
 

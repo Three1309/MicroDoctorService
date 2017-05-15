@@ -191,8 +191,8 @@ public class AppointmentAction {
         // 根据主键id来更新信息，将整个appointment传到数据库，通过id找到要更新的appointment
 
         int id = Integer.parseInt(request.getParameter("id"));
-        String doctorSay = request.getParameter("doctorSay");
-        appointmentService.updateDoctorSay(id, doctorSay);
+        String diagnose = request.getParameter("doctorSay");
+        appointmentService.updateDoctorSay(id, diagnose);
 
         PrintWriter out = response.getWriter();
         out.print("updateDoctorSay_success");

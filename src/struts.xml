@@ -33,6 +33,12 @@
         <action name="find_allhospital" class="com.zhuolang.action.AppointmentAction" method="findAllHospital"></action>
         <action name="find_alloffice" class="com.zhuolang.action.AppointmentAction" method="findAllOffice"></action>
 
+        <!--分享表 接口-->
+        <action name="addShareSend" class="com.zhuolang.action.ShareSendAction" method="addShareSend"></action>
+        <action name="deleteShareSendBySendId" class="com.zhuolang.action.ShareSendAction" method="deleteShareSendBySendId"></action>
+
+
+
     </package>
 
 </struts>    
