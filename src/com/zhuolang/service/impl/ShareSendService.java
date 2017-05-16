@@ -60,9 +60,12 @@ public class ShareSendService implements IShareSendService {
                 }
                 shareDtoS.add(shareDto);
             }
-            for (int i = shareDtoS.size() - 1; i >= 0; i++) {
-                shareDtoList.add(shareDtoS.get(i));
+            if (shareDtoS != null && shareDtoS.size() > 0) {
+                for (int i = shareDtoS.size() - 1; i >= 0; i++) {
+                    shareDtoList.add(shareDtoS.get(i));
+                }
             }
+
         }
         return shareDtoList;
     }
