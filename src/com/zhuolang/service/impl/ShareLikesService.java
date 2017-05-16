@@ -41,13 +41,30 @@ public class ShareLikesService implements IShareLikesService {
     }
 
     /**
+     * 根据sendId删除赞
+     * @param sendId
+     * @return
+     */
+    @Override
+    public boolean deleteShareLikesBySendId(int sendId) {
+        String hql="delete from ShareLikes where sendId=?";
+        List<Object> object = new ArrayList<Object>();
+        object.add(sendId);
+        if(shareLikesDao.executeHql(hql, object)>0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * 根据id取消赞
      * @param id
      * @return
      */
     @Override
     public boolean deleteshareLikesById(int id) {
-        String hql="from ShareLikes where id=?";
+        String hql="delete from ShareLikes where id=?";
         List<Object> object = new ArrayList<Object>();
 
         object.add(id);
@@ -55,6 +72,26 @@ public class ShareLikesService implements IShareLikesService {
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * 根据sendId、likeserId查找是否已有赞，并返回该条数据
+     * @param sendId
+     * @param likeserId
+     * @return
+     */
+    @Override
+    public List<ShareLikes> findLikesBySendIdAndLikeserId(int sendId,int likeserId) {
+        String hql="from ShareLikes where sendId=? and likeserId=?";
+        List<Object> object = new ArrayList<Object>();
+        object.add(sendId);
+        object.add(likeserId);
+        List<ShareLikes> shareLikes = shareLikesDao.find(hql, object);
+        if (shareLikes != null && shareLikes.size() > 0) {
+            return shareLikes;
+        } else {
+            return null;
         }
     }
 

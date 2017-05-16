@@ -17,8 +17,8 @@ public class ShareDiscuss {
     @Column(name = "sendId", length = 11)
     private int sendId;
 
-    @Column(name = "discussId", length = 11)
-    private int discussId;
+    @Column(name = "discusserId", length = 11)
+    private int discusserId;
 
     @Column(name = "discussContent")
     private String discussContent;
@@ -42,12 +42,12 @@ public class ShareDiscuss {
         this.sendId = sendId;
     }
 
-    public int getDiscussId() {
-        return discussId;
+    public int getDiscusserId() {
+        return discusserId;
     }
 
-    public void setDiscussId(int discussId) {
-        this.discussId = discussId;
+    public void setDiscusserId(int discusserId) {
+        this.discusserId = discusserId;
     }
 
     public String getDiscussContent() {
@@ -71,7 +71,7 @@ public class ShareDiscuss {
         return "ShareDiscuss{" +
                 "id=" + id +
                 ", sendId=" + sendId +
-                ", discussId=" + discussId +
+                ", discusserId=" + discusserId +
                 ", discussContent='" + discussContent + '\'' +
                 ", discussTime=" + discussTime +
                 '}';

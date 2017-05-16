@@ -20,14 +20,36 @@ public class ShareSend {
     @Column(name = "sendContent")
     private String sendContent;
 
+    @Column(name = "sendTitle", length = 60)
+    private String sendTitle;
+
     @Column(name = "sendTime")
     private Date sendTime;
 
     @Column(name = "likesAmount", length = 11)
     private int likesAmount;
 
+    @Column(name = "collectAmount", length = 11)
+    private int collectAmount;
+
     @Column(name = "discussAmount", length = 11)
     private int discussAmount;
+
+    public String getSendTitle() {
+        return sendTitle;
+    }
+
+    public void setSendTitle(String sendTitle) {
+        this.sendTitle = sendTitle;
+    }
+
+    public int getCollectAmount() {
+        return collectAmount;
+    }
+
+    public void setCollectAmount(int collectAmount) {
+        this.collectAmount = collectAmount;
+    }
 
     public int getSendId() {
         return sendId;
@@ -83,8 +105,10 @@ public class ShareSend {
                 "sendId=" + sendId +
                 ", userId=" + userId +
                 ", sendContent='" + sendContent + '\'' +
+                ", sendTitle='" + sendTitle + '\'' +
                 ", sendTime=" + sendTime +
                 ", likesAmount=" + likesAmount +
+                ", collectAmount=" + collectAmount +
                 ", discussAmount=" + discussAmount +
                 '}';
     }

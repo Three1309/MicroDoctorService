@@ -34,9 +34,14 @@
         <action name="find_alloffice" class="com.zhuolang.action.AppointmentAction" method="findAllOffice"></action>
 
         <!--分享表 接口-->
+        <action name="findAllShare" class="com.zhuolang.action.ShareSendAction" method="findAllShare"></action>
+        <action name="findAllShareDiscuss" class="com.zhuolang.action.ShareSendAction" method="findAllShareDiscussBySendId"></action>
         <action name="addShareSend" class="com.zhuolang.action.ShareSendAction" method="addShareSend"></action>
         <action name="deleteShareSendBySendId" class="com.zhuolang.action.ShareSendAction" method="deleteShareSendBySendId"></action>
-
+        <action name="addShareDiscuss" class="com.zhuolang.action.ShareSendAction" method="addShareDiscuss"></action>
+        <action name="deleteShareDiscuss" class="com.zhuolang.action.ShareSendAction" method="deleteShareDiscussById"></action>
+        <action name="updateShareLikes" class="com.zhuolang.action.ShareSendAction" method="updateShareLikes"></action>
+        <action name="updateShareCollect" class="com.zhuolang.action.ShareSendAction" method="updateShareCollect"></action>
 
 
     </package>

@@ -17,11 +17,21 @@ public class ShareLikes {
     @Column(name = "sendId", length = 11)
     private int sendId;
 
-    @Column(name = "likesId", length = 11)
-    private int likesId;
+    @Column(name = "likeserId", length = 11)
+    private int likeserId;
 
     @Column(name = "likesTime")
     private Date likesTime;
+
+    @Override
+    public String toString() {
+        return "ShareLikes{" +
+                "id=" + id +
+                ", sendId=" + sendId +
+                ", likeserId=" + likeserId +
+                ", likesTime=" + likesTime +
+                '}';
+    }
 
     public int getId() {
         return id;
@@ -39,12 +49,12 @@ public class ShareLikes {
         this.sendId = sendId;
     }
 
-    public int getLikesId() {
-        return likesId;
+    public int getLikeserId() {
+        return likeserId;
     }
 
-    public void setLikesId(int likesId) {
-        this.likesId = likesId;
+    public void setLikeserId(int likeserId) {
+        this.likeserId = likeserId;
     }
 
     public Date getLikesTime() {
@@ -53,15 +63,5 @@ public class ShareLikes {
 
     public void setLikesTime(Date likesTime) {
         this.likesTime = likesTime;
-    }
-
-    @Override
-    public String toString() {
-        return "ShareLikes{" +
-                "id=" + id +
-                ", sendId=" + sendId +
-                ", likesId=" + likesId +
-                ", likesTime=" + likesTime +
-                '}';
     }
 }
