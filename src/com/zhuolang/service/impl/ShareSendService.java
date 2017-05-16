@@ -41,6 +41,7 @@ public class ShareSendService implements IShareSendService {
         List<ShareSend> shareSends = shareSendDao.find(hqlShareSend);
         if (shareSends != null && shareSends.size() > 0) {
             List<ShareDto> shareDtoS = new ArrayList<ShareDto>();
+            shareDtoS.clear();
             for (ShareSend shareSend : shareSends) {
                 ShareDto shareDto = new ShareDto();
                 shareDto.setSendId(shareSend.getSendId());
@@ -60,12 +61,15 @@ public class ShareSendService implements IShareSendService {
                 }
                 shareDtoS.add(shareDto);
             }
+            shareDtoList.clear();
             if (shareDtoS != null && shareDtoS.size() > 0) {
-                for (int i = shareDtoS.size() - 1; i >= 0; i++) {
+                for (int i = shareDtoS.size()-1; i >= 0; i--) {
+                    System.out.println("shareDtoS.size()="+shareDtoS.size()+" i = "+i);
                     shareDtoList.add(shareDtoS.get(i));
                 }
             }
-
+//            shareDtoList.add(shareDtoS.get(0));
+            shareDtoS.clear();
         }
         return shareDtoList;
     }
