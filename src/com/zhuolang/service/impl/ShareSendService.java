@@ -4,8 +4,10 @@ import com.zhuolang.dao.impl.DoctorDao;
 import com.zhuolang.dao.impl.ShareSendDao;
 import com.zhuolang.dao.impl.UserDao;
 import com.zhuolang.dto.ShareDto;
+import com.zhuolang.model.ShareCollect;
 import com.zhuolang.model.ShareSend;
 import com.zhuolang.model.User;
+import com.zhuolang.service.IShareCollectService;
 import com.zhuolang.service.IShareSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +30,15 @@ public class ShareSendService implements IShareSendService {
     DoctorDao doctorDao;
     @Autowired
     ShareSendDao shareSendDao;
+    @Autowired
+    IShareCollectService shareCollectService;
 
     /**
      * 查找所有帖子，最新的在前面
      * @return
      */
     @Override
-    public List<ShareDto> findAllShare() {
+    public List<ShareDto> findAllShare(int userId) {
         List<ShareDto> shareDtoList = new ArrayList<ShareDto>();
         String hqlShareSend="from ShareSend";
         String hql = "from User where id=?";
@@ -58,6 +62,12 @@ public class ShareSendService implements IShareSendService {
                     shareDto.setUserName(user.getName());
                     shareDto.setUserNickName(user.getNickname());
                     shareDto.setUserType(user.getType());
+                }
+                List<ShareCollect> shareCollectList = shareCollectService.findCollectsBySendIdAndCollectorId(shareSend.getSendId(), userId);
+                if (shareCollectList != null && shareCollectList.size() > 0) {
+                    shareDto.setCollectOrNot("true");
+                }else {
+                    shareDto.setCollectOrNot("false");
                 }
                 shareDtoS.add(shareDto);
             }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IShareSendService {
 
-    public List<ShareDto> findAllShare();
+    public List<ShareDto> findAllShare(int userId);
 
     public void addShareSend(ShareSend shareSend);
 

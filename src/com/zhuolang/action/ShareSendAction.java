@@ -43,7 +43,7 @@ public class ShareSendAction {
     IUserService userService;
 
     /**
-     *   返回所有帖子信息
+     *   返回所有帖子信息,是否已关注
      *   @return
      *   @throws IOException
      */
@@ -51,7 +51,10 @@ public class ShareSendAction {
         HttpServletResponse response = ServletActionContext.getResponse();
         HttpServletRequest request = ServletActionContext.getRequest();
         response.setContentType("text/html;charset=utf-8");
-        List<ShareDto> shareDtoList = shareSendService.findAllShare();
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        List<ShareDto> shareDtoList = shareSendService.findAllShare(userId);
         PrintWriter out = response.getWriter();
         if (shareDtoList != null && shareDtoList.size() > 0) {
             JSONArray jsonArray = new JSONArray();
@@ -287,6 +290,7 @@ public class ShareSendAction {
                 //已收藏，则删除收藏
                 shareCollectService.deleteShareCollectByCollectId(collectList.get(0).getCollectId());
                 collectAmount = shareSendList.get(0).getCollectAmount() - 1;
+                out.print("uncollect_success");
             }else {
                 //没收藏则添加收藏
                 ShareCollect shareCollect = new ShareCollect();
@@ -295,9 +299,10 @@ public class ShareSendAction {
                 shareCollect.setCollectTime(new Date());
                 shareCollectService.addShareCollect(shareCollect);
                 collectAmount = shareSendList.get(0).getCollectAmount() + 1;
+                out.print("addcollect_success");
             }
             shareSendService.updateCollectAmount(sendId, collectAmount);
-            out.print("collect_success");
+
         }else
             out.print("collect_failure");
         out.flush();
