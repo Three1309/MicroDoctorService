@@ -5,9 +5,11 @@ import com.zhuolang.dao.impl.ShareSendDao;
 import com.zhuolang.dao.impl.UserDao;
 import com.zhuolang.dto.ShareDto;
 import com.zhuolang.model.ShareCollect;
+import com.zhuolang.model.ShareLikes;
 import com.zhuolang.model.ShareSend;
 import com.zhuolang.model.User;
 import com.zhuolang.service.IShareCollectService;
+import com.zhuolang.service.IShareLikesService;
 import com.zhuolang.service.IShareSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,8 @@ public class ShareSendService implements IShareSendService {
     ShareSendDao shareSendDao;
     @Autowired
     IShareCollectService shareCollectService;
+    @Autowired
+    IShareLikesService shareLikesService;
 
     /**
      * 查找所有帖子，最新的在前面
@@ -68,6 +72,12 @@ public class ShareSendService implements IShareSendService {
                     shareDto.setCollectOrNot("true");
                 }else {
                     shareDto.setCollectOrNot("false");
+                }
+                List<ShareLikes> shareLikesList = shareLikesService.findLikesBySendIdAndLikeserId(shareSend.getSendId(), userId);
+                if (shareLikesList != null && shareLikesList.size() > 0) {
+                    shareDto.setLikesOrNot("true");
+                }else {
+                    shareDto.setLikesOrNot("false");
                 }
                 shareDtoS.add(shareDto);
             }

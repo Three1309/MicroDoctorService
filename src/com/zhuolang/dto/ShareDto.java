@@ -19,6 +19,15 @@ public class ShareDto {
     private int discussAmount;//评论数
     private int collectAmount;//收藏数
     private String collectOrNot;//是否收藏
+    private String likesOrNot;//是否点赞
+
+    public String getLikesOrNot() {
+        return likesOrNot;
+    }
+
+    public void setLikesOrNot(String likesOrNot) {
+        this.likesOrNot = likesOrNot;
+    }
 
     public String getCollectOrNot() {
         return collectOrNot;
@@ -131,6 +140,7 @@ public class ShareDto {
                 ", discussAmount=" + discussAmount +
                 ", collectAmount=" + collectAmount +
                 ", collectOrNot='" + collectOrNot + '\'' +
+                ", likesOrNot='" + likesOrNot + '\'' +
                 '}';
     }
 }
