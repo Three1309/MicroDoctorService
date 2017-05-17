@@ -247,6 +247,7 @@ public class ShareSendAction {
                 //已点赞，则删除赞
                 shareLikesService.deleteshareLikesById(likesList.get(0).getId());
                 likesAmount = shareSendList.get(0).getLikesAmount() - 1;
+                out.print("dislikes_success");
             }else {
                 //没点赞则添加赞
                 ShareLikes shareLikes = new ShareLikes();
@@ -255,9 +256,10 @@ public class ShareSendAction {
                 shareLikes.setLikesTime(new Date());
                 shareLikesService.addShareLikes(shareLikes);
                 likesAmount = shareSendList.get(0).getLikesAmount() + 1;
+                out.print("likes_success");
             }
             shareSendService.updateLikesAmount(sendId, likesAmount);
-            out.print("likes_success");
+
         }else
             out.print("likes_failure");
         out.flush();
