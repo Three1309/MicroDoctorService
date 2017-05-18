@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.zhuolang.dto.AppointmentDto;
 import com.zhuolang.dto.ShareDiscussDto;
 import com.zhuolang.dto.ShareDto;
+import com.zhuolang.dto.ShareHouseDto;
 import com.zhuolang.model.*;
 import com.zhuolang.service.*;
 import com.zhuolang.util.TimeUtil;
@@ -43,7 +44,120 @@ public class ShareSendAction {
     IUserService userService;
 
     /**
-     *   返回所有帖子信息,是否已关注
+     *   通过userId返回用户的分享信息，包括个人信息、被评论点赞收藏数目
+     *   @return
+     *   @throws IOException
+     */
+    public String findUserShareInfo()throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        ShareHouseDto shareHouseDto = shareSendService.findUserShareInfo(userId);
+        PrintWriter out = response.getWriter();
+        if (shareHouseDto != null) {
+            JSONObject jsonObject = (JSONObject) JSON.toJSON(shareHouseDto);
+            out.print(jsonObject.toString());
+        }else {
+            out.print("nodata");
+        }
+        out.flush();
+        out.close();
+        return null;
+    }
+
+    /**
+     *   通过userId返回某用户已发表的帖子信息，包括
+     *   @return
+     *   @throws IOException
+     */
+    public String findMyShareInfoHistory()throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        List<ShareDto> shareDtoList = shareSendService.findMyShareHistory(userId);
+        PrintWriter out = response.getWriter();
+        if (shareDtoList != null && shareDtoList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (ShareDto shareDto : shareDtoList) {
+                JSONObject jsonObject = (JSONObject) JSON.toJSON(shareDto);
+                jsonArray.add(jsonObject);
+            }
+            out.print(jsonArray.toString());
+        }else {
+            out.print("nodata");
+        }
+        out.flush();
+        out.close();
+        return null;
+    }
+
+    /**
+     *   通过userId返回某用户已收藏的帖子信息
+     *   @return
+     *   @throws IOException
+     */
+    public String findMyCollectShareInfo()throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        List<ShareDto> shareDtoList = shareSendService.findMyCollectShares(userId);
+        PrintWriter out = response.getWriter();
+        if (shareDtoList != null && shareDtoList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (ShareDto shareDto : shareDtoList) {
+                JSONObject jsonObject = (JSONObject) JSON.toJSON(shareDto);
+                jsonArray.add(jsonObject);
+            }
+            out.print(jsonArray.toString());
+        }else {
+            out.print("nodata");
+        }
+        out.flush();
+        out.close();
+        return null;
+    }
+
+    /**
+     *   通过userId返回某用户已评论的帖子信息
+     *   @return
+     *   @throws IOException
+     */
+    public String findMyDiscussShareInfo()throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        response.setContentType("text/html;charset=utf-8");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        List<ShareDto> shareDtoList = shareSendService.findMyDiscussShares(userId);
+        PrintWriter out = response.getWriter();
+        if (shareDtoList != null && shareDtoList.size() > 0) {
+            JSONArray jsonArray = new JSONArray();
+            for (ShareDto shareDto : shareDtoList) {
+                JSONObject jsonObject = (JSONObject) JSON.toJSON(shareDto);
+                jsonArray.add(jsonObject);
+            }
+            out.print(jsonArray.toString());
+        }else {
+            out.print("nodata");
+        }
+        out.flush();
+        out.close();
+        return null;
+    }
+
+
+    /**
+     *   返回所有帖子信息,是否已收藏、点赞
      *   @return
      *   @throws IOException
      */

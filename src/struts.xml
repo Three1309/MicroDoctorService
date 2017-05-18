@@ -42,7 +42,10 @@
         <action name="deleteShareDiscuss" class="com.zhuolang.action.ShareSendAction" method="deleteShareDiscussById"></action>
         <action name="updateShareLikes" class="com.zhuolang.action.ShareSendAction" method="updateShareLikes"></action>
         <action name="updateShareCollect" class="com.zhuolang.action.ShareSendAction" method="updateShareCollect"></action>
-
+        <action name="findUserShareInfo" class="com.zhuolang.action.ShareSendAction" method="findUserShareInfo"></action>
+        <action name="findMyShareInfoHistory" class="com.zhuolang.action.ShareSendAction" method="findMyShareInfoHistory"></action>
+        <action name="findMyCollectShareInfo" class="com.zhuolang.action.ShareSendAction" method="findMyCollectShareInfo"></action>
+        <action name="findMyDiscussShareInfo" class="com.zhuolang.action.ShareSendAction" method="findMyDiscussShareInfo"></action>
 
     </package>
 
