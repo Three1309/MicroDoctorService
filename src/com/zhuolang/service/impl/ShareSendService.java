@@ -291,20 +291,18 @@ public class ShareSendService implements IShareSendService {
                     shareDto.setDiscussAmount(shareSend.getDiscussAmount());
                     shareDto.setCollectAmount(shareSend.getCollectAmount());
                     shareDto.setUserId(shareSend.getUserId());
+                    //评论时间
                     String dateStr = TimeUtil.dateToString(shareCollect.getDiscussTime());
-                    shareDto.setCollectOrNot(dateStr);//收藏时间
+                    shareDto.setCollectOrNot(dateStr);
+                    //评论内容
+                    shareDto.setLikesOrNot(shareCollect.getDiscussContent());
                     User user = userDao.get(hqlUser, new Object[]{shareSend.getUserId()});
                     if (user != null) {
                         shareDto.setUserName(user.getName());
                         shareDto.setUserNickName(user.getNickname());
                         shareDto.setUserType(user.getType());
                     }
-                    List<ShareLikes> shareLikesList = shareLikesService.findLikesBySendIdAndLikeserId(shareSend.getSendId(), userId);
-                    if (shareLikesList != null && shareLikesList.size() > 0) {
-                        shareDto.setLikesOrNot("true");
-                    }else {
-                        shareDto.setLikesOrNot("false");
-                    }
+
                     shareDtoS.add(shareDto);
                 }
             }
