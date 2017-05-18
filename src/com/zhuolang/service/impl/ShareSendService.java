@@ -186,6 +186,18 @@ public class ShareSendService implements IShareSendService {
                     shareDto.setUserNickName(user.getNickname());
                     shareDto.setUserType(user.getType());
                 }
+                List<ShareCollect> shareCollectList = shareCollectService.findCollectsBySendIdAndCollectorId(shareSend.getSendId(), userId);
+                if (shareCollectList != null && shareCollectList.size() > 0) {
+                    shareDto.setCollectOrNot("true");
+                }else {
+                    shareDto.setCollectOrNot("false");
+                }
+                List<ShareLikes> shareLikesList = shareLikesService.findLikesBySendIdAndLikeserId(shareSend.getSendId(), userId);
+                if (shareLikesList != null && shareLikesList.size() > 0) {
+                    shareDto.setLikesOrNot("true");
+                }else {
+                    shareDto.setLikesOrNot("false");
+                }
                 shareDtoS.add(shareDto);
             }
             shareDtoList.clear();
