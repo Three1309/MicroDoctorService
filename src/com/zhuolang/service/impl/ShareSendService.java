@@ -245,7 +245,7 @@ public class ShareSendService implements IShareSendService {
                     shareDto.setCollectAmount(shareSend.getCollectAmount());
                     shareDto.setUserId(shareSend.getUserId());
                     String dateStr = TimeUtil.dateToString(shareCollect.getCollectTime());
-                    shareDto.setCollectOrNot(dateStr);//收藏时间
+                    shareDto.setCollectOrNot(shareCollect.getCollectTime()+"");//收藏时间
                     User user = userDao.get(hqlUser, new Object[]{shareSend.getUserId()});
                     if (user != null) {
                         shareDto.setUserName(user.getName());
@@ -305,7 +305,7 @@ public class ShareSendService implements IShareSendService {
                     shareDto.setUserId(shareSend.getUserId());
                     //评论时间
                     String dateStr = TimeUtil.dateToString(shareCollect.getDiscussTime());
-                    shareDto.setCollectOrNot(dateStr);
+                    shareDto.setCollectOrNot(shareCollect.getDiscussTime()+"");
                     //评论内容
                     shareDto.setLikesOrNot(shareCollect.getDiscussContent());
                     User user = userDao.get(hqlUser, new Object[]{shareSend.getUserId()});
